@@ -1,12 +1,10 @@
-import { useState } from 'react';
-import TarjetaForm from './components/TarjetasForm';
+import Login from "./loggin/loggin";
 
 
 function App() {
   return (
-    <div className="container">
-      <h1>CRUD de Tarjetas</h1>
-      <TarjetaForm />
+    <div>
+      <Login />
     </div>
   );
 }

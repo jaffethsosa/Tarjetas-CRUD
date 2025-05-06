@@ -8,4 +8,4 @@ import { DatabaseModule } from 'src/database/database.module';
   controllers: [TarjetasController],
   providers: [TarjetasService]
 })
-export class TarjetasModule {}
+export class TarjetasModule { }

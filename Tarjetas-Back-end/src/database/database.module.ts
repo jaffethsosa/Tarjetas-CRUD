@@ -2,36 +2,29 @@ import { Module } from "@nestjs/common";
 import { createPool } from "mysql2/promise";
 
 
-const dataBase = createPool({
-    host: 'localhost',
-    user: 'Sosa',
-    password: 'ElSosa.99',
-    database: 'tarjetas_db',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-});
-
-(async () => {
+const poolProvider = {
+  provide: 'MYSQL_POOL',
+  useFactory: async () => {
+    console.log('Attempting to connect to the database...');
     try {
-      console.log('Attempting to connect to the database...');
-      const connection = await dataBase.getConnection();
-      console.log('Database connected successfully!');
-      connection.release();
-    } catch (err) {
-      console.error('Error connecting to the database:', err.message);
+      return await createPool({
+        host: 'localhost',
+        user: 'Sosa',
+        password: 'ElSosa.99',
+        database: 'tarjetas_db',
+      });
+    } catch (error) {
+      console.error('Error connecting to the database:', error);
+      throw new Error('Failed to connect to the database');
     }
-  })();
-  
+  },
+};
+
+
 
 @Module({
-    providers:[
-        {
-            provide: 'MYSQL_POOL',
-            useValue: dataBase,
-        },
-    ],
-    exports:['MYSQL_POOL'],
+  providers: [poolProvider],
+  exports: [poolProvider],
 })
 
-export class DatabaseModule {}
+export class DatabaseModule { }
