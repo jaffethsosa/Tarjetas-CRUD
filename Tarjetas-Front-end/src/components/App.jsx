@@ -1,13 +1,13 @@
 import { Outlet, Navigate } from "react-router-dom";
-import Home from "../home";
+import NavMenu from "./menu/menu";
 
 function App() {
 
 
   return (
     <div>
-      <h1>Tarjetas Sosa</h1>
-      <Outlet /> 
+      <NavMenu />
+      <Outlet />
     </div>
   );
 };

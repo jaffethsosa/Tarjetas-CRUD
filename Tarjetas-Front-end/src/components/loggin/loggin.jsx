@@ -47,12 +47,12 @@ const Login = () => {
               type="email"
               name="email"
               onChange={(e) =>
-                setUser({ ...user, email: e.target.value }) 
+                setUser({ ...user, email: e.target.value })
               }
             />
           </div>
           <div className="field">
-            <label htmlFor="password">Contraseña</label> 
+            <label htmlFor="password">Contraseña</label>
             <input
               required
               type="password"

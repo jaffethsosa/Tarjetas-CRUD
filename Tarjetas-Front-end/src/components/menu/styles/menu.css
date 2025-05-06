@@ -1,0 +1,144 @@
+/* Navbar */
+.navbar {
+    background-color: #e4ead5;
+    padding: 10px 0;
+    /* Reducido para hacerlo más pequeño */
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+}
+
+/* Contenedor principal del navbar */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* Logo */
+.navbar-logo {
+    color: #343a40;
+    font-size: 1.5rem;
+    /* Reducido tamaño del logo */
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* Menú de navegación */
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Elementos del menú */
+.navbar-menu li {
+    margin-left: 20px;
+    /* Reducido espaciado entre los elementos */
+}
+
+/* Enlaces del menú */
+.navbar-menu a {
+    text-decoration: none;
+    color: #6c757d;
+    /* Gris suave */
+    font-size: 1rem;
+    /* Reducido tamaño de los enlaces */
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Transición suave */
+}
+
+/* Estilo para el enlace de "Cerrar Sesión" */
+.navbar-menu a:last-child {
+    padding: 8px 18px;
+    border-radius: 5px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.navbar-menu a:last-child:hover {
+    background-color: #343a40;
+    color: white;
+    transition: color 0.5s ease;
+}
+
+/* Icono del menú hamburguesa para pantallas pequeñas */
+.navbar-menu-toggle {
+    display: none;
+    /* Oculto por defecto */
+    font-size: 2rem;
+    /* Icono más grande */
+    cursor: pointer;
+    color: #343a40;
+    position: absolute;
+    right: 20px;
+    /* Posicionado al lado derecho */
+}
+
+/* Responsividad: Ajustes para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-logo {
+        font-size: 1.3rem;
+        /* Ajuste del tamaño del logo */
+        margin-bottom: 10px;
+        /* Espacio para el logo */
+    }
+
+    /* Menú se oculta por defecto en pantallas pequeñas */
+    .navbar-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        display: none;
+        /* Oculto por defecto */
+        margin-top: 10px;
+
+    }
+
+    /* Espaciado entre los elementos del menú */
+    .navbar-menu li {
+        margin-left: 0;
+        /* Sin margen en pantallas pequeñas */
+        padding-top: 10px;
+        /* Espacio entre los elementos */
+        width: 100%;
+        /* Ocupa todo el ancho */
+    }
+
+    .navbar-menu.active {
+        display: flex;
+        /* Se muestra al activarse la clase */
+    }
+
+    .navbar-menu li {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .navbar-menu a {
+        padding: 12px 20px;
+        text-align: left;
+        width: 100%;
+
+    }
+
+    /* Menú hamburguesa visible en pantallas pequeñas */
+    .navbar-menu-toggle {
+        display: block;
+    }
+}
