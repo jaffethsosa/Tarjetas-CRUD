@@ -1,4 +1,4 @@
-import TarjetaForm from "../tarjetas/TarjetasForm";
+import TarjetaForm from "../info/TarjetasForm";
 
 
 function crearTarjetaPage() {

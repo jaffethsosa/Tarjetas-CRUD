@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <div className="title">
-      <h1>Bienvenido a CriptoSOSA</h1>
+      <h1>Bienvenido a Tarjetas SOSA</h1>
       <div className="login-container">
         <h1>Iniciar sesión</h1>
         <form onSubmit={submit}>

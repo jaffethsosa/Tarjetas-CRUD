@@ -8,8 +8,10 @@ import Login from './components/loggin/loggin.jsx'
 import App from './components/App.jsx'
 import Home from './home.jsx'
 import RutaPrivada from './components/rutaPrivada/rutaPrivada.jsx'
-import crearTarjetaPage from './components/crearTarjeta/crearTarjeta.jsx'
-import TarjetaForm from './components/tarjetas/TarjetasForm.jsx'
+import ListaTarjetaPage from './components/tarjetas/tarjetasPages/listaTarjeta.jsx';
+import CrearTarjetaPage from './components/tarjetas/tarjetasPages/crearTarjeta.jsx';
+import TarjetaForm from './components/tarjetas/info/TarjetasForm.jsx'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -21,11 +23,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       }
       >
         <Route index element={<Home />} />
-      </Route>
 
-      <Route path="/tarjetas" element={<App />}>
-        <Route index element={<crearTarjetaPage />} />
-        <Route path='crear' element={<TarjetaForm />} />
+        <Route path="/tarjetas">
+          <Route index element={<CrearTarjetaPage />} />
+          <Route path="crear" element={<TarjetaForm />} />
+          <Route path="lista" element={<ListaTarjetaPage />} />
+        </Route>
+
       </Route>
 
       <Route path="/login" element={<Login />} />
