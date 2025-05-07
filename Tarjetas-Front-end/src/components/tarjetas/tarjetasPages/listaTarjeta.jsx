@@ -10,9 +10,7 @@ function ListaTarjetaPage() {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL;
                 const response = await axios.get(`${apiUrl}/tarjetas`);
-
                 setTarjetas(response.data);
-                
             } catch (error) {
                 console.error("Error al obtener las tarjetas:", error);
             }
@@ -21,14 +19,17 @@ function ListaTarjetaPage() {
         fetchTarjetas();
     }, []);
 
-    const eliminarTarjeta = (index) => {
-        setTarjetas(prev => prev.filter((_, i) => i !== index));
-    };
-
     return (
         <div className="listaTarjetaPage">
             <h1>Listado de tarjetas</h1>
-            <TarjetaList tarjetas={tarjetas} onEliminar={eliminarTarjeta} />
+            {
+                tarjetas.length === 0 ? (
+                    <p>No hay tarjetas disponibles.</p>
+                ) : (
+                    <TarjetaList tarjetasParams={tarjetas} />
+                )
+            }
+            
         </div>
     );
 }

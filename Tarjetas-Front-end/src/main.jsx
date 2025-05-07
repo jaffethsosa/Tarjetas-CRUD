@@ -22,9 +22,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </RutaPrivada>
       }
       >
-        <Route index element={<Home />} />
 
-        <Route path="/tarjetas">
+        <Route path="/">
           <Route index element={<CrearTarjetaPage />} />
           <Route path="crear" element={<TarjetaForm />} />
           <Route path="lista" element={<ListaTarjetaPage />} />

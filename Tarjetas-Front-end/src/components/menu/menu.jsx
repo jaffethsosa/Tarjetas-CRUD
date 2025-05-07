@@ -29,10 +29,8 @@ function NavMenu() {
                 </div>
 
                 <ul className={`navbar-menu ${menuActive ? 'active' : ''}`}>
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/tarjetas/crear">Crear Tarjeta</a></li>
-                    <li><a href="/tarjetas/lista">Mis Tarjetas</a></li>
-                    <li><a href="/perfil">Perfil</a></li>
+                    <li><a href="crear">Crear Tarjeta</a></li>
+                    <li><a href="lista">Mis Tarjetas</a></li>
                     <li><a href="#!" onClick={handleLogout}>Cerrar Sesión</a></li>
                 </ul>
             </div>

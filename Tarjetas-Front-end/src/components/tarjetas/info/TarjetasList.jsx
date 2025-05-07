@@ -1,23 +1,47 @@
 import TarjetaItem from "./TarjetasItem";
+import { useState } from "react";
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+function TarjetaList({ tarjetasParams }) {
 
-function TarjetaList({ tarjetas, setTarjetas, onEdit }) {
+  const [tarjetas, setTarjetas] = useState(tarjetasParams ?? []);
+
   const eliminarTarjeta = async (id) => {
-    
     try {
-      await axios.delete(`${API_URL}/tarjetas/${tarjeta.id}`);
-      setTarjetas(prev => prev.filter(t => t._id !== id));
+      const response = await axios.delete(`${API_URL}/tarjetas/${id}`);
+      if(response.data.message != "Tarjeta y descripciones eliminadas correctamente") {
+        alert('Error al eliminar tarjeta: ' + response.data.message);
+        return;
+      }
+      // Filtrar la tarjeta eliminada de la lista
+      setTarjetas(prev => prev.filter(t => t.id !== id));
+      
+      alert('Tarjeta eliminada con éxito');
+
     } catch (error) {
       console.error('Error al eliminar tarjeta:', error);
     }
   };
 
-  const actualizarTarjeta = (tarjeta) => {
-    
-    onEdit(tarjeta);
+  const actualizarTarjeta = async (tarjetaActualizada) => {
+    try {
+      const response = await axios.put(`${API_URL}/tarjetas/${tarjetaActualizada.id}`, tarjetaActualizada);
+
+      if (response.data.message != "Tarjeta actualizada correctamente") {
+        alert('Error al actualizar tarjeta: ' + response.data.message);
+        return;
+      }
+      alert('Tarjeta actualizada con éxito');
+
+      setTarjetas((prevTarjetas) =>
+        prevTarjetas.map((t) => (t.id === tarjetaActualizada.id ? tarjetaActualizada : t))
+      );
+
+    } catch (error) {
+      console.error('Error al actualizar tarjeta:', error);
+    }
   };
 
   return (
