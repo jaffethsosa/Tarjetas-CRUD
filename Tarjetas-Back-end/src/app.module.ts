@@ -5,6 +5,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { LoggerModule } from './logger/logger.module';
 
 
 @Module({
@@ -16,13 +17,15 @@ import { ConfigModule } from '@nestjs/config';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
+    LoggerModule,
     TarjetasModule, 
     DatabaseModule, 
     UsuariosModule, 
-    AuthModule
+    AuthModule, LoggerModule
   ],
   controllers: [],
   providers: [],
+  exports: [],
 
   
 })
