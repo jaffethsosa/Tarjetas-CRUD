@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/tarjetas": {
+      "get": {
+        "operationId": "TarjetasController_obtenerTodas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Obtener todas las tarjetas",
+        "tags": [
+          "Tarjetas"
+        ]
+      },
+      "post": {
+        "operationId": "TarjetasController_crear",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TarjetaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Crear una nueva tarjeta",
+        "tags": [
+          "Tarjetas"
+        ]
+      }
+    },
+    "/tarjetas/{id}": {
+      "get": {
+        "operationId": "TarjetasController_obtenerTarjetaPorId",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID de la tarjeta",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Obtener una tarjeta por ID",
+        "tags": [
+          "Tarjetas"
+        ]
+      },
+      "delete": {
+        "operationId": "TarjetasController_eliminar",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID de la tarjeta",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Eliminar una tarjeta por ID",
+        "tags": [
+          "Tarjetas"
+        ]
+      },
+      "put": {
+        "operationId": "TarjetasController_actualizar",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID de la tarjeta",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TarjetaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Actualizar una tarjeta por ID",
+        "tags": [
+          "Tarjetas"
+        ]
+      }
+    },
+    "/usuarios": {
+      "post": {
+        "operationId": "UsuariosController_crear",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Usuarios"
+        ]
+      },
+      "get": {
+        "operationId": "UsuariosController_obtenerTodos",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Usuarios"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "API de Tarjetas",
+    "description": "Documentación de la API para la gestión de tarjetas",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "TarjetaDTO": {
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": "string",
+            "example": "Tarjeta de ejemplo",
+            "description": "Título de la tarjeta"
+          },
+          "descripciones": {
+            "example": [
+              "Descripción 1",
+              "Descripción 2"
+            ],
+            "description": "Lista de descripciones",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "numero_tarjeta": {
+            "type": "number",
+            "example": 1234567890123456,
+            "description": "Número de la tarjeta"
+          }
+        },
+        "required": [
+          "titulo",
+          "descripciones",
+          "numero_tarjeta"
+        ]
+      }
+    }
+  }
+}

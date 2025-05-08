@@ -1,52 +1,46 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiParam, ApiBody } from '@nestjs/swagger';
 import { TarjetasService } from './tarjetas.service';
 import { TarjetaDTO } from './interfaces/tarjeta.interface';
-import { LoggerService } from '../logger/logger.service'; // Importa tu LoggerService
 
+
+@ApiTags('Tarjetas') // Agrupa las rutas bajo el tag "Tarjetas"
 @Controller('tarjetas')
 export class TarjetasController {
-    constructor(
-        private readonly tarjetasService: TarjetasService,
-        private readonly loggerService: LoggerService, // Inyecta el LoggerService
-    ) {}
+  constructor(private readonly tarjetasService: TarjetasService) {}
 
-    @Get()
-    async obtenerTodas() {
-        this.loggerService.logSuccess('Obteniendo todas las tarjetas'); // Usa tu LoggerService
-        return await this.tarjetasService.obtenerTodas();
-    }
+  @Get()
+  @ApiOperation({ summary: 'Obtener todas las tarjetas' })
+  async obtenerTodas() {
+    return await this.tarjetasService.obtenerTodas();
+  }
 
-    @Post()
-    async crear(@Body() tarjeta: TarjetaDTO) {
-        this.loggerService.logSuccess('Creando una nueva tarjeta'); // Usa tu LoggerService
-        return this.tarjetasService.createTarjeta(tarjeta);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Crear una nueva tarjeta' })
+  @ApiBody({ type: TarjetaDTO }) // Describe el cuerpo de la solicitud
+  async crear(@Body() tarjeta: TarjetaDTO) {
+    return this.tarjetasService.createTarjeta(tarjeta);
+  }
 
-    @Delete(':id')
-    async eliminar(@Param('id') tarjetaId: number) {
-        this.loggerService.logSuccess(`Eliminando tarjeta con ID: ${tarjetaId}`); // Usa tu LoggerService
-        return this.tarjetasService.deleteTarjeta(tarjetaId);
-    }
+  @Get(':id')
+  @ApiOperation({ summary: 'Obtener una tarjeta por ID' })
+  @ApiParam({ name: 'id', description: 'ID de la tarjeta' }) // Describe el parámetro
+  async obtenerTarjetaPorId(@Param('id') tarjetaId: number) {
+    return this.tarjetasService.obtenerTarjetaPorId(tarjetaId);
+  }
 
-    @Get(':id')
-    async obtenerTarjetaPorId(@Param('id') tarjetaId: number) {
-        this.loggerService.logSuccess(`Obteniendo tarjeta con ID: ${tarjetaId}`); // Usa tu LoggerService
-        return this.tarjetasService.obtenerTarjetaPorId(tarjetaId);
-    }
+  @Delete(':id')
+  @ApiOperation({ summary: 'Eliminar una tarjeta por ID' })
+  @ApiParam({ name: 'id', description: 'ID de la tarjeta' })
+  async eliminar(@Param('id') tarjetaId: number) {
+    return this.tarjetasService.deleteTarjeta(tarjetaId);
+  }
 
-    @Put(':id')
-    async actualizar(
-        @Param('id') tarjetaId: number,
-        @Body() tarjetaData: TarjetaDTO,
-    ) {
-        this.loggerService.logSuccess(`Actualizando tarjeta con ID: ${tarjetaId}`); // Usa tu LoggerService
-        const tarjetaActualizada = await this.tarjetasService.actualizarTarjeta(
-            tarjetaId,
-            tarjetaData,
-        );
-        return {
-            message: 'Tarjeta actualizada correctamente',
-            data: tarjetaActualizada,
-        };
-    }
+  @Put(':id')
+  @ApiOperation({ summary: 'Actualizar una tarjeta por ID' })
+  @ApiParam({ name: 'id', description: 'ID de la tarjeta' })
+  @ApiBody({ type: TarjetaDTO })
+  async actualizar(@Param('id') tarjetaId: number, @Body() tarjetaData: TarjetaDTO) {
+    return this.tarjetasService.actualizarTarjeta(tarjetaId, tarjetaData);
+  }
 }

@@ -15,7 +15,7 @@ export class LoggerService {
       fs.mkdirSync(logsDir, { recursive: true });
     }
 
-    // Logger para logs de éxito
+    // Logger para logs de éxito    npm install @nestjs/swagger swagger-ui-express
     this.successLogger = winston.createLogger({
       level: 'info',
       format: winston.format.combine(
